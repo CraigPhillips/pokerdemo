@@ -1,0 +1,68 @@
+﻿@using Net.FrozenExports.PlayingCards
+@using Net.FrozenExports.PlayingCards.Poker
+@using Net.FrozenExports.PokerDemo.WebFrontEnd.ViewModels
+
+@{
+    ViewBag.Title = "PokerEvaluate";
+    Layout = "~/Views/PokerDemo/_PokerShell.cshtml";
+}
+
+@model PokerEvaluationViewModel
+
+@if(Model == null) 
+{
+    <h4 class="error-text">No poker hand data was provided to be evaluated.</h4>
+}
+else if (Model.ThrownException != null)
+{
+    <h4 class="error-text">An error occurred while attempting to evaluate the provided hands.</h4>
+    if(!String.IsNullOrEmpty(Model.ThrownException.Message))
+    { 
+        <br />
+        <p class="error-text">Details: @Model.ThrownException.Message</p>
+    }
+    
+}
+<p>Return to the <a class="back-link" href="/">hand entry page</a> to try again.</p>
+@if(Model != null && Model.Verdict != null && Model.RunnerUpHand != null &&
+    Model.Verdict.WinningHand != null && 
+    !String.IsNullOrEmpty(Model.Verdict.WinningHand.PlayerName) &&
+    Model.Verdict.VerdictType != null)
+{
+    <div class="results-section">
+        <h3>Results:</h3>
+        @if(Model.Verdict.VerdictType.Value == PokerHandVerdictType.Tie)
+        { 
+            <h4>Tie!</h4>
+        }
+        else
+        {
+            <h4>@Model.Verdict.WinningHand.PlayerName wins!</h4>
+            // Use the simple verdict description if the victory is by different hand types
+            // or if
+            if(Model.Verdict.VerdictType.Value == PokerHandVerdictType.WinByHandType ||
+                // both hands have a single card high and
+                (Model.Verdict.WinningHand.DetermineHandType() == PokerHandType.None &&
+                    Model.RunnerUpHand.DetermineHandType() == PokerHandType.None && 
+                    // the high card is not of the same rank.
+                    !(Model.Verdict.WinningHand.Cards.OrderByDescending(card => card.Rank).First().Rank ==         
+                        Model.RunnerUpHand.Cards.OrderByDescending(card => card.Rank).First().Rank)))
+            { 
+                <p>
+                    A @Html.Partial("HandType", @Model.Verdict.WinningHand)
+                    beats a @Html.Partial("HandType", @Model.RunnerUpHand)
+                </p>
+            }
+            else {
+                <p>
+                    Both have a @Html.Partial("HandType", @Model.Verdict.WinningHand)
+                    but
+                    @Model.Verdict.DecidingCardPair.Key.Rank.ToString().ToLower()s beat
+                    @Model.Verdict.DecidingCardPair.Value.Rank.ToString().ToLower()s.
+                </p>
+            }
+        }
+        @Html.Partial("PokerResultsHand", Model.Verdict.WinningHand)
+        @Html.Partial("PokerResultsHand", Model.RunnerUpHand)
+    </div>
+}

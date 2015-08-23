@@ -20,6 +20,23 @@ namespace Net.FrozenExports.PokerDemo.WebFrontEnd
             );
 
             routes.MapRoute(
+                name: "Poker Hand Evaluation",
+                url: "pokerevaluation",
+                defaults: new { controller = "PokerDemo", action = "PokerEvaluation" }
+            );
+
+            routes.MapRoute(
+                name: "Card Hands",
+                url: "cardhands",
+                defaults: new { 
+                    controller = "CardHands", 
+                    action = "GeneratedCardHands",
+                    handCount = 2,
+                    cardsPerHand = 5
+                }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { 

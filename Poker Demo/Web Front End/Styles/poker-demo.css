@@ -1,0 +1,149 @@
+﻿/*
+    Container and global styles.
+*/
+* {
+    box-sizing: border-box;
+}
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0 auto;
+    padding: 0 15px;
+
+    height: 100%;
+    width: 1020px;
+}
+
+form > p {
+    margin: 5px 0;
+}
+
+.header {
+    position: relative;
+}
+.header > * {
+    display: inline-block;
+    padding-right: 200px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.error-text {
+    color: red;
+    display: inline-block;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.error-message {
+    display: none;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+    Card styles
+*/
+
+.card {
+    box-shadow: 1px 1px 1px lightgray;
+    
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    font-size: 125%;
+    height: 125px;
+    margin-bottom: 15px;
+    position: relative;
+    width: 75px;
+
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 45px;
+}
+
+.card:before {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+.card:after {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+
+    /* Safari */ -webkit-transform: rotate(-180deg);
+    /* Firefox */ -moz-transform: rotate(-180deg);
+    /* IE */ -ms-transform: rotate(-180deg);
+    /* Opera */ -o-transform: rotate(-180deg);
+}
+
+.suit-hearts { background-image: url("/Images/hearts.png"); color: red; }
+.suit-diamonds { background-image: url("/Images/diamonds.png"); color: red; }
+.suit-spades { background-image: url("/Images/spades.png"); }
+.suit-clubs { background-image: url("/Images/clubs.png"); }
+
+.rank-two:before, .rank-two:after { content: "2"; }
+.rank-three:before, .rank-three:after { content: "3"; }
+.rank-four:before, .rank-four:after { content: "4"; }
+.rank-five:before, .rank-five:after { content: "5"; }
+.rank-six:before, .rank-six:after { content: "6"; }
+.rank-seven:before, .rank-seven:after { content: "7"; }
+.rank-eight:before, .rank-eight:after { content: "8"; }
+.rank-nine:before, .rank-nine:after { content: "9"; }
+.rank-ten:before, .rank-ten:after { content: "10"; }
+.rank-jack:before, .rank-jack:after { content: "J"; }
+.rank-queen:before, .rank-queen:after { content: "Q"; }
+.rank-king:before, .rank-king:after { content: "K"; }
+.rank-ace:before, .rank-ace:after { content: "A"; }
+
+/*
+    Input-specific styles.
+*/
+
+.hand {
+    border: 1px solid black;
+    padding: 15px;
+    position: relative;
+    margin: 25px 0 0 1px;
+}
+
+.hand > input[type="text"] { 
+    display: block; 
+    margin: 5px 0;
+}
+
+.card-wrapper {
+    display: inline-block;
+    width: 125px;
+}
+
+.card-wrapper select {
+    cursor: pointer;
+    width: 100px;
+}
+
+/*
+    Hand-evaluation-specific styles.
+*/
+
+.results-section > * {
+    margin-top: 0;
+}
+.results-section h3 {
+    margin-bottom: 10px;
+}
+.results-section h4, .results-section p {
+    margin-bottom: 5px;
+}
+
+.poker-results-hand, .cards-wrapper .card {
+    display: inline-block;
+}
+.card {
+    margin-right: -45px;
+}
+.poker-results-hand {
+    margin-right: 100px;
+}

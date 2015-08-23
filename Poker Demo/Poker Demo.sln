@@ -5,6 +5,15 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web Front End", "Web Front End\Web Front End.csproj", "{0AA001F1-F7AB-448D-A34C-4D17ECC2702C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{183050C3-3ACD-42E3-B77C-AB5C9B6D9A8D}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playing Cards", "Playing Cards\Playing Cards.csproj", "{8F53A77F-C8B1-48C8-95D8-5FC033346FAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poker Hand Evaluation Tests", "Playing Cards Tests\Poker Hand Evaluation Tests.csproj", "{D66E27CE-87BA-48C3-B0AD-84E30948A7D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +24,14 @@ Global
 		{0AA001F1-F7AB-448D-A34C-4D17ECC2702C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AA001F1-F7AB-448D-A34C-4D17ECC2702C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AA001F1-F7AB-448D-A34C-4D17ECC2702C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F53A77F-C8B1-48C8-95D8-5FC033346FAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F53A77F-C8B1-48C8-95D8-5FC033346FAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F53A77F-C8B1-48C8-95D8-5FC033346FAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F53A77F-C8B1-48C8-95D8-5FC033346FAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D66E27CE-87BA-48C3-B0AD-84E30948A7D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D66E27CE-87BA-48C3-B0AD-84E30948A7D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D66E27CE-87BA-48C3-B0AD-84E30948A7D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D66E27CE-87BA-48C3-B0AD-84E30948A7D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
