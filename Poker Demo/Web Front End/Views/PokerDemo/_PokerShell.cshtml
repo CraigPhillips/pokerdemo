@@ -2,9 +2,20 @@
 <html>
     <head>
         <title>Poker Demo</title>
+        <link rel="stylesheet" href="/Styles/poker-demo.css" />
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="/Scripts/poker-demo.js"></script>
         @RenderSection("head", required: false)
     </head>
     <body>
-        @RenderBody()
+        <div class="header">
+            <h2>Poker Demo</h2>
+            <p>For questions, please contact 
+                <a href="mailto:craig.phillips@frozenexorts.net">craig.phillips@frozenexports.net</a>
+            </p>
+        </div>
+        <div class="content">
+            @RenderBody()
+        </div>
     </body>
 </html>

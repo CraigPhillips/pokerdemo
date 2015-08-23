@@ -1,0 +1,23 @@
+﻿@using Net.FrozenExports.PlayingCards
+@using Net.FrozenExports.PlayingCards.Poker
+
+@model PokerHand
+
+<div class="poker-results-hand">
+    <h4>Player: @Model.PlayerName</h4>
+    <div class="cards-wrapper">
+        @foreach(Card card in Model.Cards.OrderByDescending(card => card.Rank).ThenBy(card => card.Suit))
+        {
+            if(card.Suit != null && card.Suit.HasValue &&
+                card.Rank != null && card.Rank.HasValue)
+            {
+                String suitClass = String.Format(
+                    "suit-{0}", card.Suit.Value.ToString().ToLower());
+                String rankClass = String.Format(
+                    "rank-{0}", card.Rank.Value.ToString().ToLower());
+            
+                <div class="card @suitClass @rankClass"></div>
+            }
+        }
+    </div>
+</div>

@@ -1,5 +1,72 @@
-﻿@{
+﻿@using Net.FrozenExports.PlayingCards;
+
+@{
     Layout = "~/Views/PokerDemo/_PokerShell.cshtml";
+
+    int NumberOfHands = 2;
+    int CardsInHand = 5;
 }
 
-<h2>Poker Input</h2>
+<form id="hands" method="post" action="pokerevaluation">
+    <p>
+        For each player below, enter a name and select a suit and rank for each card in
+        each player's hand. Then, press the evaluate button.
+    </p>
+    <p>
+        Hands can be created automatically using the <i>Deal Hands</i> button.
+    </p>
+    <input id ="deal-hands-button" type="button" value="Deal Hands" />
+    <input type="submit" value="Evaluate" />
+    <div class="error-text" id="main-error-section">
+        <p class="error-message" id="hand-dealing-error">An error occurred while dealing hands.</p>
+        <p class="error-message" id="missing-name-error">A name must be provided for all players.</p>
+        <p class="error-message" id="missing-card-error">All cards must be set to evaluate hands.</p>
+        <p class="error-message" id="duplicate-card-error">A single card may only be used once.</p>
+    </div>
+    @{for(int handsCreated = 1; handsCreated <= NumberOfHands; handsCreated++)
+      {
+          <div class="hand" id="player-@handsCreated">
+              <label for="player-@handsCreated-name">Player Name</label>
+              <input type="text" class="player-name" 
+                     name="player-@handsCreated-name" 
+                     value="Player @handsCreated" />
+              @{for(int cardSlotsCreated = 1; cardSlotsCreated <= CardsInHand; cardSlotsCreated++)
+                {
+                    <div class="card-wrapper">
+                        <div class="card"></div>
+                        <select 
+                                class="rank-selector" 
+                                name="rank-player-@handsCreated-card-@cardSlotsCreated">
+                            <option value="">
+                                -
+                            </option>
+                            @{foreach (CardRank rank in Enum.GetValues(typeof(CardRank)))
+                            {
+                                <option value="@rank.ToString().ToLower()">
+                                    @rank.ToString()
+                                </option>
+                            }
+                            }
+                        </select>
+
+                        <select 
+                                class="suit-selector"
+                                name="suit-player-@handsCreated-card-@cardSlotsCreated">
+                            <option value="">
+                                -
+                            </option>
+                            @{foreach (CardSuit suit in Enum.GetValues(typeof(CardSuit)))
+                            {
+                                <option value="@suit.ToString().ToLower()">
+                                    @suit.ToString()
+                                </option>
+                            }
+                            }
+                        </select>
+                    </div>
+                }
+              }
+          </div>  
+      }
+    }
+</form>

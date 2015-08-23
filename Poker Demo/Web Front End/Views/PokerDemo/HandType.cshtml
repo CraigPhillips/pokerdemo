@@ -1,0 +1,42 @@
+﻿@using Net.FrozenExports.PlayingCards.Poker;
+
+@model PokerHand
+@{ PokerHandType? handType = Model.DetermineHandType(); }
+
+@if(handType != null && handType.HasValue && Model.Cards.Count > 0)
+{
+    switch(handType.Value)
+    {
+        case PokerHandType.Flush:
+            <span class="poker-hand-type">flush</span>
+            break;
+        case PokerHandType.FourOfAKind:
+            <span class="poker-hand-type">four of a kind</span>
+            break;
+        case PokerHandType.FullHouse:
+            <span class="poker-hand-type">full house</span>
+            break;
+        case PokerHandType.None:
+            <span class="poker-hand-type">
+                @Model.GroupCardsByRank().Last().Key.ToString().ToLower()
+                high</span>
+            break;
+        case PokerHandType.Pair:
+            <span class="poker-hand-type">pair</span>
+            break;
+        case PokerHandType.Straight:
+            <span class="poker-hand-type">straight</span>
+            break;
+        case PokerHandType.StraightFlush:
+            <span class="poker-hand-type">straight flush</span>
+            break;
+        case PokerHandType.ThreeOfAKind:
+            <span class="poker-hand-type">three of a kind</span>
+            break;
+        case PokerHandType.TwoPair:
+            <span class="poker-hand-type">two pair</span>
+            break;
+        default:
+            break;
+    }
+}
