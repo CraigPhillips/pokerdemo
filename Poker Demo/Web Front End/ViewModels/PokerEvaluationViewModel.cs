@@ -25,5 +25,10 @@ namespace Net.FrozenExports.PokerDemo.WebFrontEnd.ViewModels
         ///     The error that occurred during hand evaluation (if any).
         /// </summary>
         public Exception ThrownException;
+
+        /// <summary>
+        ///     Any hands which have resulted in a tie.
+        /// </summary>
+        public List<PokerHand> TiedHands;
     }
 }

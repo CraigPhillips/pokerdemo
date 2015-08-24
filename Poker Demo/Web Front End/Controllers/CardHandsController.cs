@@ -58,10 +58,7 @@ namespace Net.FrozenExports.PokerDemo.WebFrontEnd.Controllers
             if(HandCount > 0 && CardsPerHand > 0)
             {
                 CardDeck deck = cardDeckFactory();
-
-                try { viewModel.RequestedHands = deck.Deal(HandCount, CardsPerHand); }
-                /// Simply swallows exceptions so that an empty list will be returned.
-                catch (Exception) { }
+                viewModel.RequestedHands = deck.Deal(HandCount, CardsPerHand);
             }
 
             // This must be manually allowed since retrieving JSON via GET requests can lead
