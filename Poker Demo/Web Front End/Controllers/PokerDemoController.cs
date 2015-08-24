@@ -151,9 +151,13 @@ namespace Net.FrozenExports.PokerDemo.WebFrontEnd.Controllers
                 }
 
                 viewModel.Verdict = pokerHandJudge.Judge(player1Hand, player2Hand);
-                viewModel.RunnerUpHand =
-                    viewModel.Verdict.WinningHand == player1Hand ?
-                        player2Hand : player1Hand;
+                if (viewModel.Verdict.VerdictType == PokerHandVerdictType.Tie)
+                    viewModel.TiedHands = new List<PokerHand>()
+                                            { player1Hand, player2Hand };
+                else
+                    viewModel.RunnerUpHand =
+                        viewModel.Verdict.WinningHand == player1Hand ?
+                            player2Hand : player1Hand;
             }
             catch(Exception ex)
             {

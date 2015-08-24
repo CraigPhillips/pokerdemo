@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="Azure_Deployment" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2014-06.2.4">
+  <Role name="Web Front End">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="pokerdemotest" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBpQYJKoZIhvcNAQcDoIIBljCCAZICAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEG6bnS6ZxoaYTlv7yFzF1u8wDQYJKoZIhvcNAQEBBQAEggEAki7GKykOe7lWGf22Gbi4GeIrPUL0H7GRKT/fTlcuHtM6JY7WkicEqeeW+oGRkbDq7/o9dv1azcYMHUZVVXl6I+xeNmN+0pqxBVmS0/amNvP/CTplSl2AvjLuvuRmjwafHyC1lDECrgEmWR4qqIwuX0C8ia3x4EtV9UyehW24rpHMxAurd1Jb4aXnzBRCP5s+GyzK74it+Rdgb+ujtAxO2AdNLHDdwA1Y/MtIsQfEHAbDHtX2TqFIIZAgrZrbQdwxFmVYLXRPN6/gHjLI6hbAGqulO5Rp/Bwhxk5O+CPemgPKacBeCRBllpcv/ikt4qm11z3WtIVwRW/5VccNrMFyQTA7BgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECK4ko/rQZYTSgBhGOb7BXMssba77WBj+N2vpQC7ptZ06prQ=" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2020-08-23T23:59:59.0000000-07:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="63DBB4310916779EACD37B599E7CB7155B27B66C" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>

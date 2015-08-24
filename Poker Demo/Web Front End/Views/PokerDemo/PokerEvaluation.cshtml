@@ -24,10 +24,9 @@ else if (Model.ThrownException != null)
     
 }
 <p>Return to the <a class="back-link" href="/">hand entry page</a> to try again.</p>
-@if(Model != null && Model.Verdict != null && Model.RunnerUpHand != null &&
-    Model.Verdict.WinningHand != null && 
-    !String.IsNullOrEmpty(Model.Verdict.WinningHand.PlayerName) &&
-    Model.Verdict.VerdictType != null)
+@if(Model != null && Model.Verdict != null &&
+    Model.Verdict.VerdictType != null &&
+    (Model.Verdict.WinningHand != null || Model.Verdict.VerdictType.Value == PokerHandVerdictType.Tie))
 {
     <div class="results-section">
         <h3>Results:</h3>
@@ -37,6 +36,27 @@ else if (Model.ThrownException != null)
         }
         else
         {
+            Func<PokerHand, bool> handRequiresABeforeDescription = (pokerHand) =>
+            {
+                bool requiresA = true;
+
+                if (pokerHand != null &&
+                    pokerHand.DetermineHandType() == PokerHandType.None)
+                {
+                    CardRank highestCardRank = pokerHand.GroupCardsByRank().Last().Key;
+                    if (highestCardRank == CardRank.Ace ||
+                        highestCardRank == CardRank.Eight)
+                    {
+                        requiresA = false;
+                    }
+                }
+
+                return requiresA;
+            };
+
+            bool winningHandRequiresA = handRequiresABeforeDescription(Model.Verdict.WinningHand);
+            bool runnerUpHandRequiresA = handRequiresABeforeDescription(Model.RunnerUpHand);
+
             <h4>@Model.Verdict.WinningHand.PlayerName wins!</h4>
             // Use the simple verdict description if the victory is by different hand types
             // or if
@@ -47,22 +67,36 @@ else if (Model.ThrownException != null)
                     // the high card is not of the same rank.
                     !(Model.Verdict.WinningHand.Cards.OrderByDescending(card => card.Rank).First().Rank ==         
                         Model.RunnerUpHand.Cards.OrderByDescending(card => card.Rank).First().Rank)))
-            { 
+            {   
                 <p>
-                    A @Html.Partial("HandType", @Model.Verdict.WinningHand)
-                    beats a @Html.Partial("HandType", @Model.RunnerUpHand)
+                    @if(winningHandRequiresA) { <span>A</span> }
+                    else { <span>An</span> }
+                    @Html.Partial("HandType", @Model.Verdict.WinningHand)
+                    beats 
+                    @if(runnerUpHandRequiresA) { <span>a</span> }
+                    else { <span>an</span> }
+                    @Html.Partial("HandType", @Model.RunnerUpHand)
                 </p>
             }
             else {
                 <p>
-                    Both have a @Html.Partial("HandType", @Model.Verdict.WinningHand)
+                    Both have 
+                    @if(winningHandRequiresA) { <span>a</span> }
+                    else { <span>an</span> }
+                    @Html.Partial("HandType", @Model.Verdict.WinningHand)
                     but
                     @Model.Verdict.DecidingCardPair.Key.Rank.ToString().ToLower()s beat
                     @Model.Verdict.DecidingCardPair.Value.Rank.ToString().ToLower()s.
                 </p>
             }
         }
-        @Html.Partial("PokerResultsHand", Model.Verdict.WinningHand)
-        @Html.Partial("PokerResultsHand", Model.RunnerUpHand)
+        @Html.Partial("PokerResultsHand",
+            Model.Verdict.VerdictType == PokerHandVerdictType.Tie && Model.TiedHands != null ?
+                Model.TiedHands.FirstOrDefault() :
+                Model.Verdict.WinningHand)
+        @Html.Partial("PokerResultsHand",
+             Model.Verdict.VerdictType == PokerHandVerdictType.Tie && Model.TiedHands != null ?
+                 Model.TiedHands.LastOrDefault() :
+                 Model.RunnerUpHand)
     </div>
 }
